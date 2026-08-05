@@ -192,6 +192,42 @@ post:
 See `forward` skill Mode D (LLM Fusion) for the general parallel dispatch
 pattern.
 
+## Character Trimming Strategy
+
+When a draft exceeds 3000 chars, not all trims are equal. Ranked by
+effectiveness:
+
+1. **Quoted external text** — The single best trim target. If the post
+   includes a long quote (e.g., a model comparison verdict), shorten it
+   by removing clauses. The quote is external content, so trimming it
+   doesn't change the author's voice, and the humanizer doesn't flag
+   quoted text as AI-slop. One quote trim can save 30-50 chars.
+
+2. **Redundant adverbs** — "exactly", "actually", "really",
+   "requirements", "for context". These add chars without meaning. Easy
+   2-5 char wins, but you need many of them.
+
+3. **Duplicate descriptors** — "main workhorse" when "workhorse" was
+   already established. "same model name, same parameter count, same
+   infrastructure requirements" → drop "requirements".
+
+4. **Filler phrases** — "for context", "in order to", "knowing that I
+   have". See humanizer pattern E23.
+
+5. **Last resort: cut a paragraph** — If you're still 50+ over after the
+   above, merge two short paragraphs into one. Never cut the hook, the
+   quote, or the closer.
+
+### Write Clean Once
+
+The preferred workflow is to apply humanizer patterns DURING the
+initial draft, not after. Writing generic prose then fixing it wastes
+one full analysis cycle and usually requires 3-5 patch iterations. When
+the draft is written with burstiness, specificity, and no AI-slop from
+the start, the first humanizer analysis often passes 2.0/2.0 with zero
+fixes needed. See `references/deepseek-v4-flash-0731-post-2026-08-04.md`
+for a worked example where this approach worked on the first pass.
+
 ## Pitfalls
 
 1. **Em dashes are the #1 humanizer fail.** Technical drafts use em
@@ -246,3 +282,7 @@ pattern.
   NVFP4 LinkedIn post session. 3-draft LLM Fusion merge pattern, character
   count management, user expansion request, best-elements table, CMUX reply
   protocol, and key lessons.
+- `references/deepseek-v4-flash-0731-post-2026-08-04.md` — Worked example:
+  DeepSeek V4 Flash 0731 vs Regular benchmark post. Write-clean-once workflow
+  (humanizer passed 2.0/2.0 on first analysis), 5-iteration char trimming log,
+  quote-trimming technique, content preservation/removal table.
