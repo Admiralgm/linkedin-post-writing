@@ -106,7 +106,7 @@ This step is NOT optional. The humanizer catches statistical AI tells
 that are invisible to manual review. Run it before AND after edits.
 
 ```bash
-python3 config/profiles/agent/skills/creative/humanizer/scripts/humanizer_analyze.py \
+python3 skills/creative/humanizer/scripts/humanizer_analyze.py \
   --file /path/to/draft.md
 ```
 
