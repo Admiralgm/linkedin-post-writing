@@ -7,7 +7,7 @@ author: Hermes Agent
 metadata:
   hermes:
     category: productivity
-    tags: [linkedin, social-media, writing, XXXXXX, voice-calibration]
+    tags: [linkedin, social-media, writing, User-User, voice-calibration]
 ---
 
 # LinkedIn Post Writing — User
